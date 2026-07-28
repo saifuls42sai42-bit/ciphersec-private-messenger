@@ -18,6 +18,18 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+      unzip -o *.zip || true
+if [ ! -f "settings.gradle" ] && [ ! -f "settings.gradle.kts" ]; then
+FILES=$(find . -maxdepth 3 -name "settings.gradle*" | head -n 1)
+if [ -n "FILES" ]; then
+DIR=(dirname "$FILES")
+if [ "$DIR" != "." ]; then
+cp -rn $DIR/* .. 2>/dev/null || true
+cp -rn $DIR/.* ../2>/dev/null || true
+fi
+fi
+fi
+
 
     - name: Unzip project file
       run: |
