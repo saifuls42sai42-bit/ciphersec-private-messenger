@@ -23,14 +23,14 @@ jobs:
       run: |
         unzip -o *.zip || true
         if [ ! -f "settings.gradle" ] && [ ! -f "settings.gradle.kts" ]; then
-          DIR=$(dirname $(find . -maxdepth 3 -name "settings.gradle*" | head -n 1))
+          DIR=$(dirname$(find . -maxdepth 3 -name "settings.gradle*" | head -n 1))
           if [ -n "$DIR" ] && [ "$DIR" != "." ]; then
-            cp -rn $DIR/* . 2>/dev/null || true
-            cp -rn $DIR/.* . 2>/dev/null || true
+            cp -rn $DIR/* .. 2>/dev/null || true
+            cp -rn $DIR/.* ../2>/dev/null || true
           fi
         fi
 
-    - name: Grant execute permission for gradlew
+    - name: Grant execute permission for gradle
       run: |
         if [ -f "./gradlew" ]; then
           chmod +x ./gradlew
